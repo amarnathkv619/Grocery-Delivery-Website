@@ -3,17 +3,17 @@ import Product from "../models/Product.js"
 //api/product/add
 export const addProduct = async (req,res)=>{
     try {
-        let productData = JSON.parse(req.body.productData)
-        const images = req.files
+        let productData = JSON.parse(req.body.productData)//	Parses product details from frontend
+        const images = req.files//Gets uploaded image files
 
-        let imagesUrl = await Promise.all(
+        let imagesUrl = await Promise.all(//Waits for all uploads to complete
             images.map(async(item)=>{
-                let result= await cloudinary.uploader.upload(item.path,{resource_type:'image'});
+                let result= await cloudinary.uploader.upload(item.path,{resource_type:'image'});//Uploads each image to Cloudinary
                 return result.secure_url
             })
         )
-        await Product.create({...productData, image: imagesUrl})
-
+        await Product.create({...productData, image: imagesUrl})//	Saves product in MongoDB
+//Using the spread operator allows to take all key-value pairs from productData and spread them into a new object, and then add or override any additional fields like image
         res.json({success:true, message:"Product added"})
     } catch (error) {
         console.log(error.message)
@@ -31,6 +31,7 @@ export const productList = async (req,res)=>{
     } catch (error) {
         console.log(error.message)
         res.json({success:false,message:error.message})
+        
     }
 }
 

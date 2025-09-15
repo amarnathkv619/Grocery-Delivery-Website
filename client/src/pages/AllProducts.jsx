@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext'
 import ProductCard from '../components/ProductCard'
 
 function AllProducts() {
-    const { products, searchQuery} =useAppContext()
+    const { products, searchQuery} = useAppContext()
     const[filteredProducts,setFilteredProducts]= useState([])
 
     useEffect(()=>{

@@ -40,6 +40,9 @@ const Cart = () => {
             if(!selectedAddress){
                 return toast.error('Please select an address')
             }
+              console.log("📦 Order Items:", cartArray);
+        console.log("👤 User:", user);
+        console.log("🆔 user._id:", user?._id);
             if(PaymentOption === "COD"){
                 console.log("Order items:", cartArray);
 

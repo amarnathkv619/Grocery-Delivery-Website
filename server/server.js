@@ -24,7 +24,7 @@ const allowedOrigins=['http://localhost:5173','https://grocery-delivery-website-
 app.post('/stripe',express.raw({type:'application/json'}),stripeWebhooks)
 
 //middleware config
-app.use(express.json())
+app.use(express.json())//parses that JSON into a JavaScript object and assigns it to req.body.
 app.use(cookieParser())
 app.use(cors({origin:allowedOrigins, credentials:true}))
 
