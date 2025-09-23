@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react"; // 👈 1. IMPORT useEffect
 import Navbar from "./components/Navbar";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
@@ -23,7 +23,16 @@ import Contact from "./pages/Contact";
 function App() {
   const isSellerPath = useLocation().pathname.includes("seller");
 
-  const { showUserLogin , isSeller} = useAppContext();
+  // 👇 2. GET THE checkAuth FUNCTION FROM YOUR CONTEXT
+  const { showUserLogin, isSeller, fetchUser } = useAppContext();
+
+  // 👇 3. ADD THIS ENTIRE useEffect HOOK
+  useEffect(() => {
+    // This function will now run automatically every time the app loads
+    // or reloads, restoring the user's session if a valid cookie exists.
+    fetchUser()
+  }, []); // The empty array ensures this only runs once on the initial load.
+
   return (
     <div className="text-default min-h-screen text-gray-700 bg-white">
       {isSellerPath ? null : <Navbar />}
@@ -39,14 +48,14 @@ function App() {
           <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/products/:category/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/add-address" element={<AddAddress/>} />
-          <Route path="/my-orders" element={<MyOrders/>} />
-          <Route path="/loader" element={<Loading/>} />
-          <Route path="/contact" element={<Contact/>} /> 
-          <Route path="/seller" element={isSeller ? <SellerLayout/>:<Sellerlogin/>} >
-          <Route index element={isSeller ? <AddProduct/>:null}/>
-          <Route path='product-list'element={<ProductList/>}/>
-          <Route path='orders'element={<Orders/>}/>
+          <Route path="/add-address" element={<AddAddress />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/loader" element={<Loading />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/seller" element={isSeller ? <SellerLayout /> : <Sellerlogin />}>
+            <Route index element={isSeller ? <AddProduct /> : null} />
+            <Route path="product-list" element={<ProductList />} />
+            <Route path="orders" element={<Orders />} />
           </Route>
         </Routes>
       </div>

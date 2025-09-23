@@ -150,7 +150,7 @@ if(user){
 }
 },[cartItems])
 
-    const value={navigate,user,setUser,setisSeller,isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItem,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount,axios,fetchProducts,setCartItems}
+    const value={navigate,user,setUser,setisSeller,isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItem,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount,axios,fetchProducts,setCartItems,fetchUser}
 
     return <AppContext.Provider value={value}>
 
