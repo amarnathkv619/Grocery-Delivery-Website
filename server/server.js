@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // --- CORS Configuration ---
-const allowedOrigins = ['http://localhost:5173', 'https://grocery-delivery-website-beta.vercel.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://grocery-delivery-website-uzfe.vercel.app'];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 
