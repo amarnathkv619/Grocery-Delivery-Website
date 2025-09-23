@@ -7,10 +7,10 @@ export const sellerLogin = async(req,res)=>{
         const {email, password} =req.body;
     if(password === process.env.SELLER_PASSWORD && email === process.env.SELLER_EMAIL){
         const token = jwt.sign({email},process.env.JWT_SECRET,{expiresIn:'7d'});
-// Set token as a cookie 
+// Set token as a cookie...  Instead of just sending the token back as data, we are setting it as a cookie in the user's browser.
         res.cookie('sellerToken',token,{
             httpOnly:true, //JavaScript on the frontend cannot access this cookie (protects against XSS)
-            secure:process.env.NODE_ENV === 'production',
+            secure:process.env.NODE_ENV === 'production',//Ensures the cookie is only sent over HTTPS (encrypted connections) when your app is in production.
             sameSite:process.env.NODE_ENV === 'production' ? 'none': 'strict',//csrf protection
             maxAge: 7*24*60*60*1000,
         });

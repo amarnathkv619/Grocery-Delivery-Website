@@ -20,6 +20,7 @@ export const register = async (req,res)=>{
 
         const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'})
 
+        // to automatically log the user in immediately after they create an account.
         res.cookie('token',token,{
             httpOnly:true, //prevet js to access the cookie
             secure:process.env.NODE_ENV === 'production',//use secure cookie in production
@@ -52,7 +53,7 @@ export const login = async (req, res)=>{
             return res.json({success:false,message:'Invalid email or password'})
         }
         const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'})
-
+//to create a secure session for the user after they have successfully authenticated.
         res.cookie('token',token,{
             httpOnly:true, //prevet js to access the cookie
             secure:process.env.NODE_ENV === 'production',//use secure cookie in production
@@ -66,7 +67,7 @@ export const login = async (req, res)=>{
     }
 }
 
-//check auth :api/user/is-auth
+//check auth :api/user/is-auth to fetch the profile information of the currently logged-in user
 export const isAuth = async (req, res) => {
     try {
         const userId = req.user.id; // ✅ Coming from middleware

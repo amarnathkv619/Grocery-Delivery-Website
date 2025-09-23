@@ -203,10 +203,9 @@ export const stripeWebhooks = async (request, response) => {
     let event;
 
     try {
-        // This is the line that is failing. It will be fixed by the correct secret key.
+        
         event = stripe.webhooks.constructEvent(request.body, sig, webhookSecret);
 
-        // All the logic is now safely inside the 'try' block.
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object;
             const { orderId, userId } = session.metadata;

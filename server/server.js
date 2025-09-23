@@ -18,8 +18,7 @@ const port = process.env.PORT || 4000;
 // This MUST be the very first route definition and come BEFORE express.json()
 app.post('/api/order/stripe/webhook', express.raw({ type: 'application/json' }), stripeWebhooks);
 
-// --- Regular Middleware ---
-// Now, the JSON parser can run for all other routes
+
 app.use(express.json());
 app.use(cookieParser());
 
