@@ -8,25 +8,29 @@ const Login = () => {
     const [password, setPassword] = React.useState("");
     const {setShowUserLogin,setUser,axios,navigate}= useAppContext()
 
-    const onSubmitHandler = async (event)=>{
-        try {
+ const onSubmitHandler = async (event) => {
+    try {
         event.preventDefault();
-        const {data}= await axios.post(`/api/user/${state}`,{name,email,password})
-        
+        const { data } = await axios.post(`/api/user/${state}`, { name, email, password });
 
-        if(data.success){
-            navigate('/')
-            setUser(data.user)
-            setShowUserLogin(false)
-        }else{
-            toast.error(data.message)
+        if (data.success) {
+            // ✅ 1. Set the user state FIRST
+            setUser(data.user);
+
+            // ✅ 2. Close the login modal
+            setShowUserLogin(false);
+            
+            // ✅ 3. THEN navigate
+            navigate('/');
+
+            toast.success("Login Successful"); // Optional: give user feedback
+        } else {
+            toast.error(data.message);
         }
-    
-        } catch (error) {
-            toast.error(error.message)
-        }
-    
+    } catch (error) {
+        toast.error(error.message);
     }
+};
     return (
         <div onClick={()=>setShowUserLogin(false)}className="fixed top-0 bottom-0 left-0 right-0 z-30 flex items-center text-sm text-gray-600 bg-black/50">
 

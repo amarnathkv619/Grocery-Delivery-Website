@@ -33,7 +33,7 @@ function MyOrders() {
           <div key={index} className='border border-gray-300 rounded-lg mb-10 p-4 py-5 max-w-4xl'>
             <p className='flex justify-between md:items-center text-gray-400 md:font-medium max-md:flex-col'>
               <span>Order Id : {order._id}</span>
-              <span>Payement : {order.paymentType}</span>
+              <span>Payement : {order.payementType}</span>
               <span>Total Amount: ${order.amount}</span>
             </p>
             {order.items.map((item, index)=>(
